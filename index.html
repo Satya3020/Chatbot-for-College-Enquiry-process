@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Tour</title>
+    <style>
+      #left-pane {
+  float: left;
+  width: 200px;
+  height: 900px;
+  background-color: #f2f2f2;
+  border-right: 1px solid #ccc;
+}
+
+#left-pane ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+#left-pane li {
+  margin: 10px 0;
+}
+
+#left-pane a {
+  display: block;
+  padding: 10px;
+  color: #333;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+#left-pane a:hover {
+  background-color: #333;
+  color: #fff;
+}
+
+        #central-screen {
+            float: left;
+            margin-left: 50px;
+        }
+
+        #map {
+          position: fixed;
+          bottom: 10px;
+          right: 10px;
+          width: 100px;
+          height: 100px;
+          border-radius: 50%;
+          overflow: hidden;
+          transition: all 0.3s ease-in-out;
+        }
+        
+        #map:hover {
+          width: 300px;
+          height: 200px;
+        }
+        
+        #map iframe {
+          width: 100%;
+          height: 100%;
+          border: none;
+        }
+        
+
+        #map-icon {
+          position: fixed;
+          bottom: 10px;
+          right: 10px;
+          width: 50px;
+          height: 50px;
+          background-color: #fff;
+          border-radius: 25px;
+          box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
+          z-index: 1;
+      }
+      
+      #map-icon:hover {
+          cursor: pointer;
+          box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
+      }
+      
+      #map-icon img {
+          width: 100%;
+          height: 100%;
+          border-radius: 25px;
+      }
+      
+    </style>
+</head>
+<body bgcolor="lightgrey">
+    <div id="left-pane">
+        <ul>
+            <li><H2><center>Virtual Campus Tour</center></H2></li><br />
+            <li><a href="#" onclick="changeImage('https://i.ibb.co/jTcxsV0/G01.jpg')">AUDITORIUM GO1</a></li>
+            <li><a href="#" onclick="changeImage('https://i.ibb.co/3BxZ7MN/DSC00340-1.jpg')">LIBRARY</a></li>
+            <li><a href="#" onclick="changeImage('https://i.ibb.co/jwx28HQ/DSC00305.jpg')">FABLAB</a></li>
+            <li><a href="#" onclick="changeImage('https://i.ibb.co/g7V6h77/DSC00426.jpg')">MECHANICAL DEPARTMENT LAB</a></li>
+            <li><a href="#" onclick="changeImage('https://i.ibb.co/mvn5Gwk/DSC00454.jpg')">ENTRANCE</a></li>
+            <li><a href="#" onclick="changeImage('https://i.ibb.co/cCXPbRx/DSC00321.jpg')">CSE DEPARTMENT LAB</a></li>
+            <li><a href="#" onclick="changeImage('https://i.ibb.co/bXbVM3r/clr.jpg')">CLASSROOM</a></li>
+            <li><a href="#" onclick="changeImage('')">SEMINAR HALL</a></li>
+            <li><a href="#" onclick="changeImage('')">SMART ROOM</a></li>
+
+
+        </ul>
+    </div>
+    <div id="central-screen">
+        <iframe id="panorama-viewer" width="1200" height="700" title="Panorama Viewer" scrolling="no" src="https://renderstuff.com/tools/360-panorama-web-viewer-embed/?image=https://i.ibb.co/jTcxsV0/G01.jpg"></iframe>
+    </div>
+    <div id="map-icon">
+      <a href="https://goo.gl/maps/Pcb6mv6icwgX8K7GA" target="_blank">
+        <img src="https://www.gstatic.com/images/branding/product/1x/maps_32dp.png" alt="Map Icon">
+      </a>
+    </div>
+    
+    <script>
+        function changeImage(imageURL) {
+            var viewer = document.getElementById("panorama-viewer");
+            viewer.src = "https://renderstuff.com/tools/360-panorama-web-viewer-embed/?image=" + imageURL;
+        }
+    </script>
+</body>
+</html>

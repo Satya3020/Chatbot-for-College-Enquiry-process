@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>PDF Viewer</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: sans-serif;
+        background-color: #f4f4f4;
+      }
+      
+      #pdf-container {
+        width: 80%;
+        margin: 50px auto;
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+        background-color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      #logo-container {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        width: 80px;
+        height: 80px;
+      }
+      
+      #logo-container img {
+        width: 100%;
+        height: 100%;
+      }
+      
+      #pdf-viewer {
+        width: 120%;
+        height: 70vh;
+      }
+      #pdf-container.loading::after {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background-color: rgba(255, 255, 255, 0.7);
+        z-index: 1;
+      }
+      
+      #pdf-container.loading::before {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border: 4px solid #f3f3f3;
+        border-top: 4px solid #3498db;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        animation: spin 2s linear infinite;
+        z-index: 2;
+      }
+      
+      @keyframes spin {
+        0% {
+          transform: translate(-50%, -50%) rotate(0deg);
+        }
+        100% {
+          transform: translate(-50%, -50%) rotate(360deg);
+        }
+      }
+      
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: sans-serif;
+        background: linear-gradient(to bottom right, #011427, #FFD700);
+      }
+      
+      #header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100px;
+      }
+      
+      #header h1 {
+        font-size: 2em;
+        color: white;
+        margin: 0;
+      }
+      
+      #pdf-container {
+        width: 80%;
+        margin: 50px auto;
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+        background-color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      
+      #pdf-viewer {
+        width: 120%;
+        height: 70vh;
+      }
+      
+      .button {
+        display: inline-block;
+        padding: 10px 20px;
+        margin: 20px;
+        border: none;
+        border-radius: 5px;
+        background-color: #4CAF50;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+      
+      .button:hover {
+        background-color: #3e8e41;
+      }
+      
+      #licet {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        font-size: 1.5em;
+        font-weight: bold;
+        text-transform: uppercase;
+        color: rgb(4, 4, 50);
+        text-shadow: 1px 1px 1px yellow;
+      }
+      
+      
+      .button {
+        display: inline-block;
+        padding: 10px 20px;
+        margin: 20px;
+        border: none;
+        border-radius: 5px;
+        background-color: #4CAF50;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+      
+      .button:hover {
+        background-color: #3e8e41;
+      }
+    </style>
+  </head>
+  <body> 
+    <div id="logo-container">
+      <img src="logo.png">
+    </div>
+    
+    <br />
+
+    <h2 style="text-align:center; color:azure; font-size:20px"><b>LICET - PLACEMENT DETAILS </b></h2>
+    <div id="pdf-container">
+      <iframe id="pdf-viewer" src=""></iframe>
+      <div id="pdf-description"></div>
+    </div>
+    
+    <div class="button" id="prev-button">Previous</div>
+    <div class="button" id="next-button">Next</div>
+    <div id="licet">LICET</div>
+    <div id="logo-container">
+  <img src="logo.png">
+</div>
+
+
+    <script>
+      const pdfUrls = [
+        { url: "https://licet.ac.in/wp-content/uploads/2022/09/NBA-PLACEMENT-FORMAT-2022.xlsx.pdf", description: "Placement Insights of 2022" },
+        { url: "https://licet.ac.in/wp-content/uploads/2021/09/2021.pdf", description: "Placement Insights of 2021" },
+        { url: "https://licet.ac.in/wp-content/uploads/2021/09/2020.pdf", description: "Placement Insights of 2020" },
+        { url: "https://licet.ac.in/wp-content/uploads/2021/09/2019.pdf", description: "Placement Insights of 2019" },
+        { url: "https://licet.ac.in/wp-content/uploads/2021/09/2018.pdf", description: "Placement Insights of 2018" }
+      ];
+      
+      let currentIndex = 0;
+      
+      const pdfViewer = document.getElementById("pdf-viewer");
+      const pdfDescription = document.getElementById("pdf-description");
+      const prevButton = document.getElementById("prev-button");
+      const nextButton = document.getElementById("next-button");
+      
+      function loadPdf(url, description) {
+        pdfViewer.src = `https://docs.google.com/gview?url=${url}&embedded=true`;
+        pdfDescription.textContent = `Loading ${description}...`;
+      }
+      
+      function showPdf() {
+        const { url, description } = pdfUrls[currentIndex];
+        loadPdf(url, description);
+      }
+      
+      function showNextPdf() {
+        currentIndex = (currentIndex + 1) % pdfUrls.length;
+        showPdf();
+      }
+      
+      function showPrevPdf() {
+        currentIndex = (currentIndex - 1 + pdfUrls.length) % pdfUrls.length;
+        showPdf();
+      }
+      function loadPdf(url, description) {
+        pdfViewer.src = `https://docs.google.com/gview?url=${url}&embedded=true`;
+        pdfDescription.textContent = `Loading ${description}...`;
+        pdfContainer.classList.add("loading");
+        pdfViewer.onload = () => {
+          pdfDescription.textContent = description;
+          pdfContainer.classList.remove("loading");
+        };
+      }
+      
+      prevButton.addEventListener("click", showPrevPdf);
+      nextButton.addEventListener("click", showNextPdf);
+      
+      showPdf();
+    </script>
+  </body>
+</html>
