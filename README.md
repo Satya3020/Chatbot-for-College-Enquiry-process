@@ -15,7 +15,6 @@ Python packages used → Pygame
                                             Tkinter
 
 Machine learning algorithm → Cosine similarity
-![image](https://github.com/Satya3020/Chatbot-for-College-Enquiry-process/assets/92669492/ba9189c1-d085-4a77-aed1-f84ebec2e372)
 
 <img width="470" alt="image" src="https://github.com/Satya3020/Chatbot-for-College-Enquiry-process/assets/92669492/7956eec5-7260-4220-8424-518ae0d5cc7e">
 
